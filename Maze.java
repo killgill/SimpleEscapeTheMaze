@@ -69,6 +69,7 @@ public class Maze {
 
       this.startLoc = startLoc;
       this.exitLoc = exitLoc;
+//      LinkedList<MazeCoord> path = new LinkedList<MazeCoord>();
    }
 
 
@@ -133,7 +134,7 @@ public class Maze {
     */
    public LinkedList<MazeCoord> getPath() {
 
-      return new LinkedList<MazeCoord>();   // DUMMY CODE TO GET IT TO COMPILE
+      return path;// DUMMY CODE TO GET IT TO COMPILE
 
    }
 
@@ -160,22 +161,46 @@ public class Maze {
 	 int row = loc.getRow();
 	 int col = loc.getCol();
 	 mazeData[row][col] = 1; //sets it as visited
-	 if ((row != 0) && search(new MazeCoord(row-1,col))) {
-	    path.addFirst(loc);
-	    return true;
+	 if (row !=0) {
+	    if (search(new MazeCoord(row-1,col))) {
+	       path.addFirst(loc);
+	       return true;
+	    }
 	 }
-	 else if ((row != rows) && search(new MazeCoord(row+1,col))) {
-	    path.addFirst(loc);
-	    return true;
+	 else if (row != rows) {
+	    if (search(new MazeCoord(row+1,col))) {
+	       path.addFirst(loc);
+	       return true;
+	    }
 	 }
-	 else if ((col != 0) && search(new MazeCoord(row,col-1))) {
-	    path.addFirst(loc);
-	    return true;
+	 else if (col != 0) {
+	    if (search(new MazeCoord(row,col-1))) {
+	       path.addFirst(loc);
+	       return true;
+	    }
 	 }
-	 else if ((col != cols) && search(new MazeCoord(row,col+1))) {
-	    path.addFirst(loc);
-	    return true;
+	 else if (col != cols) {
+	    if (search(new MazeCoord(row,col+1))) {
+	       path.addFirst(loc);
+	       return true;
+	    }
 	 }
+//	 if ((row != 0) && search(new MazeCoord(row-1,col))) {
+//	    path.addFirst(loc);
+//	    return true;
+//	 }
+//	 else if ((row != rows) && search(new MazeCoord(row+1,col))) {
+//	    path.addFirst(loc);
+//	    return true;
+//	 }
+//	 else if ((col != 0) && search(new MazeCoord(row,col-1))) {
+//	    path.addFirst(loc);
+//	    return true;
+//	 }
+//	 else if ((col != cols) && search(new MazeCoord(row,col+1))) {
+//	    path.addFirst(loc);
+//	    return true;
+//	 }
       }
       return false;
    }
