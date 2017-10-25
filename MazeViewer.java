@@ -85,12 +85,15 @@ public class MazeViewer {
    private static MazeFrame readMazeFile(String fileName) throws IOException {
       // DUMMY CODE TO GET IT TO COMPILE
       Scanner sc = new Scanner(fileName);
+      sc.useDelimiter("");
       int rows = sc.nextInt();
       int cols = sc.nextInt();
       boolean[][] mazeInfo = new boolean[rows][cols];
       for (int i = 0; i < rows; i++) {
+	 String s = new String(sc.nextInt());
+	 Reader reader = new InputStreamReader(s);
 	 for (int j = 0; j < cols; j++) {
-	    if (sc.nextInt() == 1) {
+	    if (reader.read() == 1) {
 	       mazeInfo[i][j] = TRUE;
 	    }
 	    else {
