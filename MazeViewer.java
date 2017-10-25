@@ -5,6 +5,7 @@
 
 
 import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import javax.swing.JFrame;
 import java.io.Reader;
@@ -47,7 +48,6 @@ public class MazeViewer {
 
    public static void main(String[] args)  {
 
-      String fileName = "";
 
       try {
 
@@ -89,10 +89,15 @@ public class MazeViewer {
    */
    private static MazeFrame readMazeFile(String fileName) throws IOException {
       // DUMMY CODE TO GET IT TO COMPILE
-      Scanner sc = new Scanner(fileName);
+      File inFile = new File(fileName);
+
+      Scanner sc = new Scanner(inFile);
+
       int rows = sc.nextInt();
       int cols = sc.nextInt();
+      
       boolean[][] mazeInfo = new boolean[rows][cols];
+
       for (int i = 0; i < rows; i++) {
 	 String s = new String(sc.nextLine());
 	 for (int j = 0; j < cols; j++) {
@@ -104,8 +109,10 @@ public class MazeViewer {
 	    }
 	 }
       }
+
       MazeCoord startLoc = new MazeCoord(sc.nextInt(),sc.nextInt());
       MazeCoord endLoc = new MazeCoord(sc.nextInt(),sc.nextInt());
+
       return new MazeFrame(mazeInfo, startLoc, endLoc);
    }
 }
