@@ -55,6 +55,7 @@ public class MazeViewer {
             System.out.println("ERROR: missing file name command line argument");
          }
          else {
+	    String fileName;
             fileName = args[0];
             
             JFrame frame = readMazeFile(fileName);
