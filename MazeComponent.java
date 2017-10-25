@@ -5,8 +5,11 @@
 
 import java.awt.Graphics;
 import javax.swing.JComponent;
-import java.awr.Rectangle;
+import java.awt.Rectangle;
 import java.awt.Graphics2D;
+import java.awt.Color;
+import java.util.Scanner;
+import java.io.Reader;
 
 /**
    MazeComponent class
