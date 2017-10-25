@@ -95,9 +95,8 @@ public class MazeViewer {
       boolean[][] mazeInfo = new boolean[rows][cols];
       for (int i = 0; i < rows; i++) {
 	 String s = new String(sc.nextLine());
-	 Reader reader = new InputStreamReader(s);
 	 for (int j = 0; j < cols; j++) {
-	    if (reader.read() == WALL_CHAR) {
+	    if (s.charAt(j) == WALL_CHAR) {
 	       mazeInfo[i][j] = WALL;
 	    }
 	    else {
