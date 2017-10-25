@@ -68,22 +68,26 @@ public class MazeComponent extends JComponent
       Rectangle[][] mazeBoxes = new Rectangle[rows][cols];
       for (int i = 0; i < rows; i++) {
 	 for (int j = 0; j < cols; j++) {
-	    mazeBoxes[i][j].setBounds(START_X+(i*BOX_WIDTH),START_Y+(j*BOX_HEIGHT),BOX_WIDTH,BOX_HEIGHT); 
+	    Rectangle r = new Rectangle();
+	    r.setBounds(START_X+(i*BOX_WIDTH),START_Y+(j*BOX_HEIGHT),BOX_WIDTH,BOX_HEIGHT); 
 	    if (mazeData[i][j]) {
 	       g2.setColor(BLACK);
-	       g2.fill(mazeBoxes[i][j]);
+	       g2.fill(r);
 	    }
 	    else {
 	       g2.setColor(WHITE);
-	       g2.fill(mazeBoxes[i][j]);
+	       g2.fill(r);
 	    }
+	    mazeBoxes[i][j] = r;
 	 }
       }
       g2.setColor(YELLOW);
       Rectangle startLoc = new Rectangle(START_X + entryLoc.getRow()*BOX_WIDTH + INSET, START_Y + entryLoc.getCol()*BOX_HEIGHT + INSET, BOX_WIDTH - 2*INSET, BOX_HEIGHT - 2*INSET);
+      
       g2.fill(startLoc);
       g2.setColor(GREEN);
       Rectangle endLoc = new Rectangle(START_X + exitLoc.getRow()*BOX_WIDTH + INSET, START_Y + exitLoc.getCol()*BOX_HEIGHT + INSET, BOX_WIDTH - 2*INSET, BOX_HEIGHT - 2*INSET);
+
       g2.fill(endLoc);
    }
 }
