@@ -147,9 +147,9 @@ public class Maze {
     */
    public boolean search()  {  
       LinkedList<MazeCoord> path = new LinkedList<MazeCoord>();
-      return searchHelper(startLoc);
+      return searchHelper(startLoc, path);
    }
-   private boolean searchHelper(MazeCoord loc) {
+   private boolean searchHelper(MazeCoord loc, LinkedList<MazeCoord> path) {
       Debug.debug(loc.toString());
       Debug.debug(String.valueOf(loc.equals(exitLoc)));
       if (hasWallAt(loc)) {
@@ -167,25 +167,25 @@ public class Maze {
 	 int col = loc.getCol();
 	 mazeData[row][col] = 1; //sets it as visited
 	 if (row !=0 ) {
-	    if (searchHelper(new MazeCoord(row-1,col))) {
+	    if (searchHelper(new MazeCoord(row-1,col),path)) {
 //	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
 	 if (row != rows) {
-	    if (searchHelper(new MazeCoord(row+1,col))) {
+	    if (searchHelper(new MazeCoord(row+1,col),path)) {
 //	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
 	 if (col != 0) {
-	    if (searchHelper(new MazeCoord(row,col-1))) {
+	    if (searchHelper(new MazeCoord(row,col-1),path)) {
 //	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
 	 if (col != cols) {
-	    if (searchHelper(new MazeCoord(row,col+1))) {
+	    if (searchHelper(new MazeCoord(row,col+1),path)) {
 //	       path.addFirst(loc);
 	       return true;
 	    }
