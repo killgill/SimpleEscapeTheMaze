@@ -95,12 +95,15 @@ public class MazeViewer {
       Scanner sc = new Scanner(inFile);
 
       int rows = sc.nextInt();
+      Debug.debug(Integer.toString(rows));
       int cols = sc.nextInt();
+      Debug.debug(Integer.toString(cols));
       
       boolean[][] mazeInfo = new boolean[rows][cols];
 
       for (int i = 0; i < rows; i++) {
-	 String s = new String(sc.nextLine());
+	 String s = new String(sc.next());
+	 Debug.debug(s);
 	 for (int j = 0; j < cols; j++) {
 	    if (s.charAt(j) == WALL_CHAR) {
 	       mazeInfo[i][j] = WALL;

@@ -1,6 +1,6 @@
 public class Debug
 {
-   public void Debug(String toPrint) {
+   public static void debug(String toPrint) {
       System.out.println("DEBUG: " + toPrint);
    }
 }
