@@ -67,7 +67,7 @@ public class MazeViewer {
 
       }
       catch (FileNotFoundException exc) {
-         System.out.println("ERROR: File not found: " + fileName);
+         System.out.println("ERROR: File not found: " + exc.getMessage());
       }
       catch (IOException exc) {
          exc.printStackTrace();
