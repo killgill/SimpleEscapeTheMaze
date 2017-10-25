@@ -84,8 +84,22 @@ public class MazeViewer {
    */
    private static MazeFrame readMazeFile(String fileName) throws IOException {
       // DUMMY CODE TO GET IT TO COMPILE
-      return new MazeFrame(new boolean[1][1], new MazeCoord(0, 0), new MazeCoord(0, 0));
-
+      Scanner sc = new Scanner(fileName);
+      int rows = sc.nextInt();
+      int cols = sc.nextInt();
+      boolean[][] mazeInfo = new boolean[rows][cols];
+      for (int i = 0; i < rows; i++) {
+	 for (int j = 0; j < cols; j++) {
+	    if (sc.nextInt() == 1) {
+	       mazeInfo[i][j] = TRUE;
+	    }
+	    else {
+	       mazeInfo[i][j] = FALSE;
+	    }
+	 }
+      }
+      MazeCoord startloc = new MazeCoord(sc.nextInt(),sc.nextInt());
+      MazeCoord endLoc = new MazeCoord(sc.nextInt(),sc.nextInt());
+      return new MazeFrame(mazeInfo, startLoc, endLoc);
    }
-
 }
