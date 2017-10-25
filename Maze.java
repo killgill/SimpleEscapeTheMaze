@@ -69,7 +69,8 @@ public class Maze {
 
       this.startLoc = startLoc;
       this.exitLoc = exitLoc;
-//      LinkedList<MazeCoord> path = new LinkedList<MazeCoord>();
+      LinkedList<MazeCoord> path = new LinkedList<MazeCoord>();
+      path.addFirst(exitLoc);
    }
 
 
@@ -147,6 +148,8 @@ public class Maze {
       @return whether a path was found.
     */
    public boolean search(MazeCoord loc)  {  
+      Debug.debug(loc.toString());
+      Debug.debug(String.valueOf(loc.equals(exitLoc)));
       if (hasWallAt(loc)) {
 	 return false;
       }
@@ -154,53 +157,37 @@ public class Maze {
 	 return false;
       }
       else if (loc.equals(exitLoc)) {
-	 path.addFirst(loc);
+	 path.add(loc);
 	 return true;
       }
       else {
 	 int row = loc.getRow();
 	 int col = loc.getCol();
 	 mazeData[row][col] = 1; //sets it as visited
-	 if (row !=0) {
+	 if (row !=0 ) {
 	    if (search(new MazeCoord(row-1,col))) {
-	       path.addFirst(loc);
+//	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
-	 else if (row != rows) {
+	 if (row != rows) {
 	    if (search(new MazeCoord(row+1,col))) {
-	       path.addFirst(loc);
+//	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
-	 else if (col != 0) {
+	 if (col != 0) {
 	    if (search(new MazeCoord(row,col-1))) {
-	       path.addFirst(loc);
+//	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
-	 else if (col != cols) {
+	 if (col != cols) {
 	    if (search(new MazeCoord(row,col+1))) {
-	       path.addFirst(loc);
+//	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
-//	 if ((row != 0) && search(new MazeCoord(row-1,col))) {
-//	    path.addFirst(loc);
-//	    return true;
-//	 }
-//	 else if ((row != rows) && search(new MazeCoord(row+1,col))) {
-//	    path.addFirst(loc);
-//	    return true;
-//	 }
-//	 else if ((col != 0) && search(new MazeCoord(row,col-1))) {
-//	    path.addFirst(loc);
-//	    return true;
-//	 }
-//	 else if ((col != cols) && search(new MazeCoord(row,col+1))) {
-//	    path.addFirst(loc);
-//	    return true;
-//	 }
       }
       return false;
    }
@@ -215,5 +202,4 @@ public class Maze {
       }
    }
 }
-
 
