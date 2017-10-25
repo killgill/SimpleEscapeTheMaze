@@ -34,10 +34,10 @@ public class Maze {
    public static final boolean WALL = true;
    private int rows = 0;
    private int cols = 0;
-   private boolean[][]  mazeData;
+   private int[][] mazeData;
    private MazeCoord startLoc;
    private MazeCoord exitLoc;
-   private LinkedList<MazeCoord>;
+   private LinkedList<MazeCoord> path;
    
   
 
@@ -54,13 +54,21 @@ public class Maze {
    public Maze(boolean[][] mazeData, MazeCoord startLoc, MazeCoord exitLoc) {
       rows = mazeData.length;
       cols = mazeData[0].length;
-      this.mazeData = mazeData;
+      this.mazeData = new int[rows][cols];
+
+      for (int i=0;i<rows;i++) {
+	 for (int j=0; j<cols;j++){
+	    if (mazeData[i][j]) {
+	       this.mazeData[i][j] = 2; //2 represents wall
+	    }
+	    else {
+	       this.mazeData[i][j] = 0; //0 represents free
+	    }
+	 }
+      }
+
       this.startLoc = startLoc;
       this.exitLoc = exitLoc;
-
-
-
- 
    }
 
 
@@ -89,7 +97,14 @@ public class Maze {
       PRE: 0 <= loc.getRow() < numRows() and 0 <= loc.getCol() < numCols()
    */
    public boolean hasWallAt(MazeCoord loc) {
-      return false;   // DUMMY CODE TO GET IT TO COMPILE
+      row = loc.getRow();
+      col = loc.getCol();
+      if (mazeData[row][col] == 2) {
+	 return true;
+      }
+      else{
+	 return false;
+      }
    }
    
 
@@ -131,11 +146,48 @@ public class Maze {
       @return whether a path was found.
     */
    public boolean search(MazeCoord loc)  {  
-       if (loc.getRow > 0) {
-           MazeCoord locUp = new MazeCoord(loc.getRow - 1, loc.getCol);
-           if locUp.equals(exitLoc)
-
-
+      if (hasWallAt(loc) {
+	 return false;
+      }
+      else if (wasVisited(loc) {
+	 return false;
+      }
+      else if (loc.equals(exitLoc)) {
+	 path.addFirst(loc);
+	 return true;
+      }
+      else {
+	 int row = loc.getRow();
+	 int col = loc.getCol();
+	 mazeData[row][col] = 1; //sets it as visited
+	 if ((row != 0) && search(new MazeCoord(row-1,col))) {
+	    path.addFirst(loc);
+	    return true;
+	 }
+	 else if ((row != rows) && search(new MazeCoord(row+1,col))) {
+	    path.addFirst(loc);
+	    return true;
+	 }
+	 else if ((col != 0) && search(new MazeCoord(row,col-1))) {
+	    path.addFirst(loc);
+	    return true;
+	 }
+	 else if ((col != cols) && search(new MazeCoord(row,col+1))) {
+	    path.addFirst(loc);
+	    return true;
+	 }
+      }
+      return false;
+   }
+   public boolean wasVisited(MazeCoord loc) {
+      row = loc.getRow();
+      col = loc.getCol();
+      if (mazeData[row][col] == 1) {
+	 return true;
+      }
+      else{
+	 return false;
+      }
    }
 }
 
