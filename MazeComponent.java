@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.util.Scanner;
 import java.io.Reader;
+import java.io.InputStreamReader;
 
 /**
    MazeComponent class
