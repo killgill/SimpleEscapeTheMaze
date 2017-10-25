@@ -39,6 +39,8 @@ public class MazeViewer {
    
    private static final char WALL_CHAR = '1';
    private static final char FREE_CHAR = '0';
+   private static final boolean WALL = true;
+   private static final boolean FREE = false;
 
    public static void main(String[] args)  {
 
@@ -93,15 +95,15 @@ public class MazeViewer {
 	 String s = new String(sc.nextInt());
 	 Reader reader = new InputStreamReader(s);
 	 for (int j = 0; j < cols; j++) {
-	    if (reader.read() == 1) {
-	       mazeInfo[i][j] = TRUE;
+	    if (reader.read() == WALL_CHAR) {
+	       mazeInfo[i][j] = WALL;
 	    }
 	    else {
-	       mazeInfo[i][j] = FALSE;
+	       mazeInfo[i][j] = FREE;
 	    }
 	 }
       }
-      MazeCoord startloc = new MazeCoord(sc.nextInt(),sc.nextInt());
+      MazeCoord startLoc = new MazeCoord(sc.nextInt(),sc.nextInt());
       MazeCoord endLoc = new MazeCoord(sc.nextInt(),sc.nextInt());
       return new MazeFrame(mazeInfo, startLoc, endLoc);
    }

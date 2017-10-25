@@ -90,7 +90,7 @@ public class MazeFrame extends JFrame {
          System.out.println("DEBUG: key pressed");
          
          System.out.println("DEBUG: doing maze search. . . "); 
-         boolean success = maze.search();     // maze defined in enclosing MazeFrame
+         boolean success = maze.search(maze.getEntryLoc());     // maze defined in enclosing MazeFrame
         
          mazeComponent.repaint();  // update drawing to show the results
          

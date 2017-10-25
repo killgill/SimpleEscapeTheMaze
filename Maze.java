@@ -97,8 +97,8 @@ public class Maze {
       PRE: 0 <= loc.getRow() < numRows() and 0 <= loc.getCol() < numCols()
    */
    public boolean hasWallAt(MazeCoord loc) {
-      row = loc.getRow();
-      col = loc.getCol();
+      int row = loc.getRow();
+      int col = loc.getCol();
       if (mazeData[row][col] == 2) {
 	 return true;
       }
@@ -146,10 +146,10 @@ public class Maze {
       @return whether a path was found.
     */
    public boolean search(MazeCoord loc)  {  
-      if (hasWallAt(loc) {
+      if (hasWallAt(loc)) {
 	 return false;
       }
-      else if (wasVisited(loc) {
+      else if (wasVisited(loc)) {
 	 return false;
       }
       else if (loc.equals(exitLoc)) {
@@ -180,8 +180,8 @@ public class Maze {
       return false;
    }
    public boolean wasVisited(MazeCoord loc) {
-      row = loc.getRow();
-      col = loc.getCol();
+      int row = loc.getRow();
+      int col = loc.getCol();
       if (mazeData[row][col] == 1) {
 	 return true;
       }

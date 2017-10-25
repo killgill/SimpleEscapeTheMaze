@@ -5,6 +5,8 @@
 
 import java.awt.Graphics;
 import javax.swing.JComponent;
+import java.awr.Rectangle;
+import java.awt.Graphics2D;
 
 /**
    MazeComponent class
@@ -24,6 +26,10 @@ public class MazeComponent extends JComponent
    private boolean[][] mazeData;
    private MazeCoord entryLoc;
    private MazeCoord exitLoc;
+   private final Color BLACK = new Color(0,0,0);
+   private final Color WHITE = new Color(255,255,255);
+   private final Color YELLOW = new Color(255,255,0);
+   private final Color GREEN = new Color(0,255,0);
 
    
    /**
@@ -55,10 +61,10 @@ public class MazeComponent extends JComponent
    {
       Graphics2D g2 = (Graphics2D) g;
 
-      Rectangle[][] mazeBoxes = new Rectangle[rows][cols](BOX_WIDTH,BOX_HEIGHT);
+      Rectangle[][] mazeBoxes = new Rectangle[rows][cols];
       for (int i = 0; i < rows; i++) {
 	 for (int j = 0; j < cols; j++) {
-	    mazeBoxes[i][j].setLocation(START_X+(i*BOX_WIDTH),START_Y+(j*BOX_HEIGHT)); 
+	    mazeBoxes[i][j].setBounds(START_X+(i*BOX_WIDTH),START_Y+(j*BOX_HEIGHT),BOX_WIDTH,BOX_HEIGHT); 
 	    if (mazeData[i][j]) {
 	       g2.setColor(BLACK);
 	       g2.fill(mazeBoxes[i][j]);
