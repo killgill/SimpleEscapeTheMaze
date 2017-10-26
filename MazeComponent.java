@@ -26,7 +26,7 @@ public class MazeComponent extends JComponent
    private static final int START_Y = 10;
    private static final int BOX_WIDTH = 20;  // width and height of one maze "location"
    private static final int BOX_HEIGHT = 20;
-   private static final int PATH_INSET = 4;
+   private static final int PATH_INSET = 8;
    private static final int PATH_THICKNESS = 2;
    private static final int INSET = 2; //how much smaller on each side to make entry/exit 
    private int rows;
@@ -34,7 +34,7 @@ public class MazeComponent extends JComponent
    private boolean[][] mazeData;
    private MazeCoord entryLoc;
    private MazeCoord exitLoc;
-   private LinkedList<MazeCoord> path;
+   private Maze ourMaze;
    private final Color BLACK = new Color(0,0,0);
    private final Color WHITE = new Color(255,255,255);
    private final Color YELLOW = new Color(255,255,0);
@@ -58,7 +58,7 @@ public class MazeComponent extends JComponent
       }
       entryLoc = maze.getEntryLoc();
       exitLoc = maze.getExitLoc();
-      path = maze.getPath();
+      ourMaze = maze;
 
    }
 
@@ -71,13 +71,14 @@ public class MazeComponent extends JComponent
    public void paintComponent(Graphics g)
    {
       Graphics2D g2 = (Graphics2D) g;
+      LinkedList<MazeCoord> path = ourMaze.getPath();
       paintMaze(g2);
       entryExit(g2);
-      drawPath(g2);
+      drawPath(g2, path);
 
    }
 
-   private void drawPath(Graphics2D g2) {
+   private void drawPath(Graphics2D g2, LinkedList<MazeCoord> path) {
       Debug.debug(String.valueOf(path.size()));
       ListIterator<MazeCoord> it = path.listIterator();
       MazeCoord coord1;
@@ -90,14 +91,16 @@ public class MazeComponent extends JComponent
 	 int row2 = coord2.getRow();
 	 int col1 = coord1.getCol();
 	 int col2 = coord2.getCol();
-	 if (row1 != row2) {
-	    Rectangle r = new Rectangle(START_X + col1*BOX_WIDTH + PATH_INSET, START_Y + Math.min(row1, row2)*BOX_HEIGHT + PATH_INSET, PATH_THICKNESS, BOX_HEIGHT + PATH_THICKNESS);
-	    g2.fill(r);
-	 }
-	 else if (col1 != col2) {
-	    Rectangle r = new Rectangle(START_X + Math.min(col1, col2)*BOX_WIDTH + PATH_INSET, START_Y + row1*BOX_HEIGHT + PATH_INSET, BOX_WIDTH + PATH_THICKNESS, PATH_THICKNESS);
-	    g2.fill(r);
-	 }
+	 g2.drawLine(START_X + col1*BOX_WIDTH + PATH_INSET,START_Y + row1*BOX_HEIGHT + PATH_INSET, START_X + col2*BOX_WIDTH + PATH_INSET,START_Y + row2*BOX_HEIGHT + PATH_INSET);
+
+//	 if (row1 != row2) {
+//	    Rectangle r = new Rectangle(START_X + col1*BOX_WIDTH + PATH_INSET, START_Y + Math.min(row1, row2)*BOX_HEIGHT + PATH_INSET, PATH_THICKNESS, BOX_HEIGHT + PATH_THICKNESS);
+//	    g2.fill(r);
+//	 }
+//	 else if (col1 != col2) {
+//	    Rectangle r = new Rectangle(START_X + Math.min(col1, col2)*BOX_WIDTH + PATH_INSET, START_Y + row1*BOX_HEIGHT + PATH_INSET, BOX_WIDTH + PATH_THICKNESS, PATH_THICKNESS);
+//	    g2.fill(r);
+//	 }
 	 it.previous();
       }
    }
