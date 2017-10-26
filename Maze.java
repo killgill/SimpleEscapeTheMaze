@@ -69,6 +69,7 @@ public class Maze {
 
       this.startLoc = startLoc;
       this.exitLoc = exitLoc;
+      path = new LinkedList<MazeCoord>();
    }
 
 
@@ -159,7 +160,7 @@ public class Maze {
 	 return false;
       }
       else if (loc.equals(exitLoc)) {
-	 path.add(loc);
+	 path.addFirst(loc);
 	 return true;
       }
       else {
@@ -168,25 +169,26 @@ public class Maze {
 	 mazeData[row][col] = 1; //sets it as visited
 	 if (row !=0 ) {
 	    if (searchHelper(new MazeCoord(row-1,col),path)) {
-//	       path.addFirst(loc);
+	       path.addFirst(loc);
+	       System.out.println(path);
 	       return true;
 	    }
 	 }
 	 if (row != rows) {
 	    if (searchHelper(new MazeCoord(row+1,col),path)) {
-//	       path.addFirst(loc);
+	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
 	 if (col != 0) {
 	    if (searchHelper(new MazeCoord(row,col-1),path)) {
-//	       path.addFirst(loc);
+	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
 	 if (col != cols) {
 	    if (searchHelper(new MazeCoord(row,col+1),path)) {
-//	       path.addFirst(loc);
+	       path.addFirst(loc);
 	       return true;
 	    }
 	 }
