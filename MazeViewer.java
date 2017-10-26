@@ -89,7 +89,6 @@ public class MazeViewer {
                that would also involve changing main to catch other exceptions)
    */
    private static MazeFrame readMazeFile(String fileName) throws IOException {
-      // DUMMY CODE TO GET IT TO COMPILE
       File inFile = new File(fileName);
 
       Scanner sc = new Scanner(inFile);
@@ -101,9 +100,9 @@ public class MazeViewer {
       
       boolean[][] mazeInfo = new boolean[rows][cols];
 
+      //generates the array with nested for loops
       for (int i = 0; i < rows; i++) {
 	 String s = new String(sc.next());
-	 Debug.debug(s);
 	 for (int j = 0; j < cols; j++) {
 	    if (s.charAt(j) == WALL_CHAR) {
 	       mazeInfo[i][j] = WALL;

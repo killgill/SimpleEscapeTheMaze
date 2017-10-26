@@ -43,6 +43,12 @@ public class Maze {
   
 
    /**
+   Representation invariant:
+   StartLoc and ExitLoc have coordinates in the maze
+   Maze coordinates go from 0 to rows-1 and 0 to cols-1
+   mazeData[][] is true for walls and false for free space
+   */
+   /**
       Constructs a maze.
       @param mazeData the maze to search.  See general Maze comments above for what
       goes in this array.
@@ -57,6 +63,8 @@ public class Maze {
       cols = mazeData[0].length;
       this.mazeData = new boolean[rows][cols];
 
+      //creating the local mazeData. Could be done without loop, but it's nice
+      //to use FREE and WALL
       for (int i=0;i<rows;i++) {
 	 for (int j=0; j<cols;j++){
 	    if (mazeData[i][j]) {
@@ -70,7 +78,7 @@ public class Maze {
 
       this.startLoc = startLoc;
       this.exitLoc = exitLoc;
-      this.path = new LinkedList<MazeCoord>();
+      this.path = new LinkedList<MazeCoord>();//initializing LinkedList
    }
 
 
@@ -79,7 +87,7 @@ public class Maze {
       @return number of rows
    */
    public int numRows() {
-      return rows;   // DUMMY CODE TO GET IT TO COMPILE
+      return rows;  
    }
 
    
@@ -88,7 +96,7 @@ public class Maze {
       @return number of columns
    */   
    public int numCols() {
-      return cols;   // DUMMY CODE TO GET IT TO COMPILE
+      return cols; 
    } 
  
    
@@ -114,7 +122,7 @@ public class Maze {
       Returns the entry location of this maze.
     */
    public MazeCoord getEntryLoc() {
-      return startLoc;   // DUMMY CODE TO GET IT TO COMPILE
+      return startLoc;
    }
    
    
@@ -122,7 +130,7 @@ public class Maze {
      Returns the exit location of this maze.
    */
    public MazeCoord getExitLoc() {
-      return exitLoc;   // DUMMY CODE TO GET IT TO COMPILE
+      return exitLoc;
    }
 
    
@@ -134,10 +142,8 @@ public class Maze {
       @return the maze path
     */
    public LinkedList<MazeCoord> getPath() {
-
       System.out.println("DEBUG: " + path);
-      return path;// DUMMY CODE TO GET IT TO COMPILE
-
+      return path;
    }
 
 
@@ -147,15 +153,26 @@ public class Maze {
       Client can access the path found via getPath method.
 
       @return whether a path was found.
+      An important part is the isVisited boolean array which has
+      the same dimensions as the maze, and stores whether or not
+      a location has been visited by the searchHelper function already.
+      It is, of course, initialized with all values being false
     */
    public boolean search()  {  
-      path.clear();
+      path.clear(); //just in case search is being called again
       isVisited = new boolean[rows][cols];
-      return searchHelper(startLoc);
+      return searchHelper(startLoc);//calls helper function
    }
+
+   /** 
+   This function actually does the recursive searching
+   Since there are no "virtual walls" a series of
+   if statements ensure that it does not accidentally 
+   go out of the bounds of the mazeData array
+   Otherwise, it generally follows the format of the 
+   suggested algorithm in the PA3 problem statement
+   */
    private boolean searchHelper(MazeCoord loc) {
-      Debug.debug(loc.toString());
-      Debug.debug(String.valueOf(loc.equals(exitLoc)));
       if (hasWallAt(loc)) {
 	 return false;
       }
@@ -163,13 +180,13 @@ public class Maze {
 	 return false;
       }
       else if (loc.equals(exitLoc)) {
-	 path.addFirst(loc);
+	 path.addFirst(loc);//addFirst ensures that order is from start to end
 	 return true;
       }
       else {
 	 int row = loc.getRow();
 	 int col = loc.getCol();
-	 isVisited[row][col] = true; 
+	 isVisited[row][col] = true;//sets visited to true 
 	 if (row !=0 ) {
 	    if (searchHelper(new MazeCoord(row-1,col))) {
 	       path.addFirst(loc);
@@ -198,7 +215,10 @@ public class Maze {
       return false;
    }
 
-
+   /** 
+   This class just checks if a location has been visited by checking
+   the isVisited array
+   */
    private boolean wasVisited(MazeCoord loc) {
       int row = loc.getRow();
       int col = loc.getCol();
@@ -210,4 +230,3 @@ public class Maze {
       }
    }
 }
-

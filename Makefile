@@ -29,6 +29,7 @@ getfiles:
 	-$(ASSGTS)/bin/safecopy $(ASSGTDIR)/MazeViewer.java .
 	-$(ASSGTS)/bin/safecopy $(ASSGTDIR)/MazeFrame.java .
 	-$(ASSGTS)/bin/safecopy $(ASSGTDIR)/MazeCoord.java .
+	-$(ASSGTS)/bin/safecopy $(ASSGTDIR)/Debug.java .
 	-$(ASSGTS)/bin/safecopy $(ASSGTDIR)/README .
 	-cp -r $(ASSGTDIR)/testfiles .
 
