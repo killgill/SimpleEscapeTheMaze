@@ -79,7 +79,7 @@ public class MazeComponent extends JComponent
 
    private void drawPath(Graphics2D g2) {
       LinkedList<MazeCoord> path = maze.getPath();
-      Debug.debug(String.valueOf(path.size()));
+      System.out.println(path.size());
       ListIterator<MazeCoord> it = path.listIterator();
       MazeCoord coord1;
       MazeCoord coord2;
