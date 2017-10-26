@@ -1,5 +1,5 @@
-Name: 
-USC loginid:
+Name: Karan Singh Gill
+USC loginid: karansig
 CSCI 455 PA3
 Fall 2017
 
@@ -14,7 +14,7 @@ Course Syllabus.  And I did not share my solution or parts of it with
 other students in the course."
 
 Initial below to "sign" the above statement:
-
+KSG
 
 ----------------------------------------------
 ACKNOWLEDGE ANY OUTSIDE SOURCES
@@ -26,17 +26,17 @@ and what sections of the textbook are involved (if applicable): [you do
 not need to list any of the code that we wrote for the assignment,
 i.e., the contents of the starter files for the assignment]
 
-
+I used some code from previous labs and assignments as reference material.
 
 ----------------------------------------------
 KNOWN BUGS or LIMITATIONS:
 
-
+None that I found.
 
 ----------------------------------------------
 ANY OTHER NOTES FOR THE GRADER:
 
-
+I've added it to the makefile, but Debug.java does need to be compiled as well.
 
 
 
