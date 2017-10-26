@@ -1,3 +1,7 @@
+// Name: Karan Singh Gill
+// USC loginid: karansig
+// CS 455 PA3
+// Fall 2017
 public class Debug
 {
    public static void debug(String toPrint) {

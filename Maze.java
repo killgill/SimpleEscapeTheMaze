@@ -1,5 +1,5 @@
-// Name:
-// USC loginid:
+// Name: Karan Singh Gill
+// USC loginid: karansig
 // CS 455 PA3
 // Fall 2017
 
@@ -37,7 +37,7 @@ public class Maze {
    private int[][] mazeData;
    private MazeCoord startLoc;
    private MazeCoord exitLoc;
-   private LinkedList<MazeCoord> path;
+   private static LinkedList<MazeCoord> path;
    
   
 
@@ -134,6 +134,7 @@ public class Maze {
     */
    public LinkedList<MazeCoord> getPath() {
 
+      System.out.println("DEBUG: " + path);
       return path;// DUMMY CODE TO GET IT TO COMPILE
 
    }
@@ -148,7 +149,9 @@ public class Maze {
     */
    public boolean search()  {  
       LinkedList<MazeCoord> path = new LinkedList<MazeCoord>();
-      return searchHelper(startLoc, path);
+      boolean foo = searchHelper(startLoc, path);
+      System.out.println("DEBUG: " + path);
+      return foo;
    }
    private boolean searchHelper(MazeCoord loc, LinkedList<MazeCoord> path) {
       Debug.debug(loc.toString());
@@ -170,7 +173,6 @@ public class Maze {
 	 if (row !=0 ) {
 	    if (searchHelper(new MazeCoord(row-1,col),path)) {
 	       path.addFirst(loc);
-	       System.out.println(path);
 	       return true;
 	    }
 	 }

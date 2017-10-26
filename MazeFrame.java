@@ -1,3 +1,7 @@
+// Name: Karan Singh Gill
+// USC loginid: karansig
+// CS 455 PA3
+// Fall 2017
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
