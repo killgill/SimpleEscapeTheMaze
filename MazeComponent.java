@@ -59,7 +59,6 @@ public class MazeComponent extends JComponent
       entryLoc = maze.getEntryLoc();
       exitLoc = maze.getExitLoc();
       this.maze = maze;
-
    }
 
    
@@ -71,6 +70,9 @@ public class MazeComponent extends JComponent
    public void paintComponent(Graphics g)
    {
       Graphics2D g2 = (Graphics2D) g;
+      g2.setColor(BLACK);
+      Rectangle r = new Rectangle(START_X - 1, START_Y -1 , cols*BOX_WIDTH + 1, rows*BOX_HEIGHT + 1);
+      g2.draw(r);
       paintMaze(g2);
       entryExit(g2);
       drawPath(g2);
@@ -79,7 +81,6 @@ public class MazeComponent extends JComponent
 
    private void drawPath(Graphics2D g2) {
       LinkedList<MazeCoord> path = maze.getPath();
-      System.out.println(path.size());
       ListIterator<MazeCoord> it = path.listIterator();
       MazeCoord coord1;
       MazeCoord coord2;
@@ -91,16 +92,14 @@ public class MazeComponent extends JComponent
 	 int row2 = coord2.getRow();
 	 int col1 = coord1.getCol();
 	 int col2 = coord2.getCol();
-	 g2.drawLine(START_X + col1*BOX_WIDTH + PATH_INSET,START_Y + row1*BOX_HEIGHT + PATH_INSET, START_X + col2*BOX_WIDTH + PATH_INSET,START_Y + row2*BOX_HEIGHT + PATH_INSET);
-
-//	 if (row1 != row2) {
-//	    Rectangle r = new Rectangle(START_X + col1*BOX_WIDTH + PATH_INSET, START_Y + Math.min(row1, row2)*BOX_HEIGHT + PATH_INSET, PATH_THICKNESS, BOX_HEIGHT + PATH_THICKNESS);
-//	    g2.fill(r);
-//	 }
-//	 else if (col1 != col2) {
-//	    Rectangle r = new Rectangle(START_X + Math.min(col1, col2)*BOX_WIDTH + PATH_INSET, START_Y + row1*BOX_HEIGHT + PATH_INSET, BOX_WIDTH + PATH_THICKNESS, PATH_THICKNESS);
-//	    g2.fill(r);
-//	 }
+	 if (row1 != row2) {
+	    Rectangle r = new Rectangle(START_X + col1*BOX_WIDTH + PATH_INSET, START_Y + Math.min(row1, row2)*BOX_HEIGHT + PATH_INSET, PATH_THICKNESS, BOX_HEIGHT + PATH_THICKNESS);
+	    g2.fill(r);
+	 }
+	 else if (col1 != col2) {
+	    Rectangle r = new Rectangle(START_X + Math.min(col1, col2)*BOX_WIDTH + PATH_INSET, START_Y + row1*BOX_HEIGHT + PATH_INSET, BOX_WIDTH + PATH_THICKNESS, PATH_THICKNESS);
+	    g2.fill(r);
+	 }
 	 it.previous();
       }
    }

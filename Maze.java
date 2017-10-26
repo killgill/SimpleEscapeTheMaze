@@ -148,9 +148,8 @@ public class Maze {
       @return whether a path was found.
     */
    public boolean search()  {  
-      boolean foo = searchHelper(startLoc);
-      System.out.println("DEBUG: " + path);
-      return foo;
+      path.clear();
+      return searchHelper(startLoc);
    }
    private boolean searchHelper(MazeCoord loc) {
       Debug.debug(loc.toString());
@@ -175,7 +174,7 @@ public class Maze {
 	       return true;
 	    }
 	 }
-	 if (row != rows) {
+	 if (row != rows -1) {
 	    if (searchHelper(new MazeCoord(row+1,col))) {
 	       path.addFirst(loc);
 	       return true;
@@ -187,7 +186,7 @@ public class Maze {
 	       return true;
 	    }
 	 }
-	 if (col != cols) {
+	 if (col != cols -1) {
 	    if (searchHelper(new MazeCoord(row,col+1))) {
 	       path.addFirst(loc);
 	       return true;
