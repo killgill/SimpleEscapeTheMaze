@@ -34,6 +34,7 @@ public class MazeComponent extends JComponent
    private boolean[][] mazeData;
    private MazeCoord entryLoc;
    private MazeCoord exitLoc;
+   private Maze ourMaze;
    private LinkedList<MazeCoord> path;
    private final Color BLACK = new Color(0,0,0);
    private final Color WHITE = new Color(255,255,255);
@@ -58,7 +59,7 @@ public class MazeComponent extends JComponent
       }
       entryLoc = maze.getEntryLoc();
       exitLoc = maze.getExitLoc();
-      path = maze.getPath();
+      ourMaze = maze;
 
    }
 
@@ -73,12 +74,15 @@ public class MazeComponent extends JComponent
       Graphics2D g2 = (Graphics2D) g;
       paintMaze(g2);
       entryExit(g2);
-      drawPath(g2);
+      path = ourMaze.getPath();
+      drawPath(g2, path);
 
    }
 
-   private void drawPath(Graphics2D g2) {
+   private void drawPath(Graphics2D g2, LinkedList<MazeCoord> path) {
+      if (path.listIterator() != null) {
       ListIterator<MazeCoord> it = path.listIterator();
+      Debug.debug("we made it this far");
       MazeCoord coord1;
       MazeCoord coord2;
       g2.setColor(BLUE);
@@ -98,6 +102,7 @@ public class MazeComponent extends JComponent
 	    g2.fill(r);
 	 }
 	 it.previous();
+      }
       }
    }
 
@@ -131,4 +136,3 @@ public class MazeComponent extends JComponent
       }
    }
 }
-
