@@ -34,7 +34,8 @@ public class Maze {
    public static final boolean WALL = true;
    private int rows = 0;
    private int cols = 0;
-   private int[][] mazeData;
+   private boolean[][] mazeData;
+   private boolean[][] isVisited;
    private MazeCoord startLoc;
    private MazeCoord exitLoc;
    private static LinkedList<MazeCoord> path;
@@ -54,15 +55,15 @@ public class Maze {
    public Maze(boolean[][] mazeData, MazeCoord startLoc, MazeCoord exitLoc) {
       rows = mazeData.length;
       cols = mazeData[0].length;
-      this.mazeData = new int[rows][cols];
+      this.mazeData = new boolean[rows][cols];
 
       for (int i=0;i<rows;i++) {
 	 for (int j=0; j<cols;j++){
 	    if (mazeData[i][j]) {
-	       this.mazeData[i][j] = 2; //2 represents wall
+	       this.mazeData[i][j] = WALL; 
 	    }
 	    else {
-	       this.mazeData[i][j] = 0; //0 represents free
+	       this.mazeData[i][j] = FREE; 
 	    }
 	 }
       }
@@ -100,7 +101,7 @@ public class Maze {
    public boolean hasWallAt(MazeCoord loc) {
       int row = loc.getRow();
       int col = loc.getCol();
-      if (mazeData[row][col] == 2) {
+      if (mazeData[row][col]) {
 	 return true;
       }
       else{
@@ -149,6 +150,7 @@ public class Maze {
     */
    public boolean search()  {  
       path.clear();
+      isVisited = new boolean[rows][cols];
       return searchHelper(startLoc);
    }
    private boolean searchHelper(MazeCoord loc) {
@@ -167,7 +169,7 @@ public class Maze {
       else {
 	 int row = loc.getRow();
 	 int col = loc.getCol();
-	 mazeData[row][col] = 1; //sets it as visited
+	 isVisited[row][col] = true; 
 	 if (row !=0 ) {
 	    if (searchHelper(new MazeCoord(row-1,col))) {
 	       path.addFirst(loc);
@@ -200,7 +202,7 @@ public class Maze {
    private boolean wasVisited(MazeCoord loc) {
       int row = loc.getRow();
       int col = loc.getCol();
-      if (mazeData[row][col] == 1) {
+      if (isVisited[row][col]) {
 	 return true;
       }
       else{
